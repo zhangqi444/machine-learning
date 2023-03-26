@@ -59,12 +59,6 @@ jobs:
         bash ./build.sh
       continue-on-error: false
       
-    # Build the JupyterLite
-    - shell: bash -l {0}
-      name: Build the book
-      run: |
-        jupyter lite build --contents ./open-machine-learning-jupyter-book/assignments --output-dir ./open-machine-learning-jupyter-book/_build/html/jupyterlite
-
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
