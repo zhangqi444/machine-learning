@@ -42,7 +42,7 @@ dependencies:
     - ipyevents>=2.0.1
     - ipympl>=0.8.2
     - ipycanvas>=0.9.1
-    -ipyleaflet
+    - ipyleaflet
     - plotly>=5,<6
     - bqplot
     
