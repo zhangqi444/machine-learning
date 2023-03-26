@@ -1,0 +1,1926 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>44.5. Relational vs. non-relational database &#8212; Machine Learning Open Book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/drawio.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/youtube.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "open-academy/machine-learning-utterances");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script src="https://wavedrom.com/skins/default.js"></script>
+    <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"});</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="44.6. NumPy and Pandas" href="numpy-and-pandas.html" />
+    <link rel="prev" title="44.4. Data Science introduction" href="data-science-introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Open Book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  PREREQUISITES
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../prerequisites/python-programming-introduction.html">
+   1. Python programming introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../prerequisites/python-programming-basics.html">
+   2. Python programming basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../prerequisites/python-programming-advanced.html">
+   3. Python programming advanced
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DATA SCIENCE
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../data-science/introduction/introduction.html">
+   4. Introduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/introduction/defining-data-science.html">
+     4.1. Defining data science
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/introduction/data-science-ethics.html">
+     4.2. Data Science ethics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/introduction/defining-data.html">
+     4.3. Defining data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/introduction/introduction-to-statistics-and-probability.html">
+     4.4. Introduction to statistics and probability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../data-science/working-with-data/working-with-data.html">
+   5. Working with data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/working-with-data/relational-databases.html">
+     5.1. Relational databases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/working-with-data/non-relational-data.html">
+     5.2. Non-relational data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/working-with-data/numpy.html">
+     5.3. NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/working-with-data/pandas.html">
+     5.4. Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/working-with-data/data-preparation.html">
+     5.5. Data preparation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../data-science/data-visualization/data-visualization.html">
+   6. Data visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-visualization/visualizing-quantities.html">
+     6.1. Visualizing quantities
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-visualization/visualization-distributions.html">
+     6.2. Visualizing distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-visualization/visualization-proportions.html">
+     6.3. Visualizing proportions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-visualization/visualization-relationships.html">
+     6.4. Visualizing relationships: all about honey 🍯
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-visualization/meaningful-visualizations.html">
+     6.5. Making meaningful visualizations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../data-science/data-science-lifecycle/data-science-lifecycle.html">
+   7. Data Science lifecycle
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-science-lifecycle/introduction.html">
+     7.1. Introduction to the Data Science lifecycle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-science-lifecycle/analyzing.html">
+     7.2. Analyzing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-science-lifecycle/communication.html">
+     7.3. Communication
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../data-science/data-science-in-the-cloud/data-science-in-the-cloud.html">
+   8. Data Science in the cloud
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-science-in-the-cloud/introduction.html">
+     8.1. Introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-science-in-the-cloud/the-low-code-no-code-way.html">
+     8.2. The “low code/no code” way
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../data-science/data-science-in-the-cloud/the-azure-ml-sdk-way.html">
+     8.3. Data Science in the cloud: The “Azure ML SDK” way
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../data-science/data-science-in-the-wild.html">
+   9. Data Science in the real world
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  FUNDAMENTALS OF MACHINE LEARNING
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-fundamentals/ml-overview.html">
+   10. Machine learning overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../ml-fundamentals/regression/regression-models-for-machine-learning.html">
+   11. Regression models for Machine Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/regression/tools-of-the-trade.html">
+     11.1. Tools of the trade
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/regression/managing-data.html">
+     11.2. Managing data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/regression/linear-and-polynomial-regression.html">
+     11.3. Linear and polynomial regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/regression/logistic-regression.html">
+     11.4. Logistic regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-fundamentals/build-a-web-app-to-use-a-machine-learning-model.html">
+   12. Build a web app to use a Machine Learning model
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../ml-fundamentals/classification/getting-started-with-classification.html">
+   13. Getting started with classification
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/classification/introduction-to-classification.html">
+     13.1. Introduction to classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/classification/more-classifiers.html">
+     13.2. More classifiers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/classification/yet-other-classifiers.html">
+     13.3. Yet other classifiers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-fundamentals/classification/applied-ml-build-a-web-app.html">
+     13.4. Applied Machine Learning : build a web app
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  ADVANCED MACHINE LEARNING
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../ml-advanced/clustering/clustering-models-for-machine-learning.html">
+   14. Clustering models for Machine Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-advanced/clustering/introduction-to-clustering.html">
+     14.1. Introduction to clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../ml-advanced/clustering/k-means-clustering.html">
+     14.2. K-Means clustering
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-advanced/kernel-method.html">
+   15. Kernel method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-advanced/model-selection.html">
+   16. Model selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-advanced/ensemble-learning.html">
+   17. Ensemble learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-advanced/unsupervised-learning.html">
+   18. Unsupervised learning (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../ml-advanced/generative-models.html">
+   19. Generative models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DEEP LEARNING
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/dl-overview.html">
+   20. Deep learning overview (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/CNN.html">
+   21. Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/GAN.html">
+   22. Generative adversarial networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/RNN.html">
+   23. Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/AutoEncoder.html">
+   24. Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/LSTM.html">
+   25. Long-short term memory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/NLP.html">
+   26. NLP (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/time-series.html">
+   27. Time series (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/DQN.html">
+   28. DQN (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/dl-summary.html">
+   29. Summary of deep learning (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deep-learning/image-classification.html">
+   30. Image classification
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  MACHINE LEARNING PRODUCTIONIZATION
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../machine-learning-productionization/overview.html">
+   31. Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../machine-learning-productionization/problem-framing.html">
+   32. Problem framing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../machine-learning-productionization/data-engineering.html">
+   33. Data engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../machine-learning-productionization/model-training-and-evaluation.html">
+   34. Model training &amp; evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../machine-learning-productionization/model-deployment.html">
+   35. Model deployment
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SUPPORTING MATERIALS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/pytorch.html">
+   36. PyTorch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/bamboolib.html">
+   37. Bamboolib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/mito.html">
+   38. Mito
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/KNN.html">
+   39. KNN (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/semi-supervised-learning.html">
+   40. Semi-supervised learning (TBD)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/unbalanced-problems.html">
+   41. Unbalanced problems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../supporting-materials/automl.html">
+   42. AutoML (TBD)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OTHERS
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../assignments/introduction.html">
+   43. Assignments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/get-started.html">
+     43.1. Get started
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/set-up-env/first-assignment.html">
+     43.2. First assignment
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/set-up-env/second-assignment.html">
+     43.3. Second assignment
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/project-plan-template.html">
+     43.4. Project Plan​ Template
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/prerequisites/python-programming-introduction.html">
+     43.5. Python programming introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/prerequisites/python-programming-basics.html">
+     43.6. Python programming basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/prerequisites/python-programming-advanced.html">
+     43.7. Python programming advanced
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/analyzing-text-about-data-science.html">
+     43.8. Analyzing text about Data Science
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/data-science-scenarios.html">
+     43.9. Data Science scenarios
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/write-a-data-ethics-case-study.html">
+     43.10. Write a data ethics case study
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/lines-scatters-and-bars.html">
+     43.11. Lines, scatters and bars
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/apply-your-skills.html">
+     43.12. Apply your skills
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/try-it-in-excel.html">
+     43.13. Try it in Excel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/let-us-learn-about-birds.html">
+     43.14. Let’s learn about birds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/bird-distributions.html">
+     43.15. Bird distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/dive-into-the-beehive.html">
+     43.16. Dive into the beehive
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/build-your-own-custom-vis.html">
+     43.17. Build your own custom vis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/classifying-datasets.html">
+     43.18. Classifying datasets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/small-diabetes-study.html">
+     43.19. Small diabetes study
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/introduction-to-statistics-and-probability.html">
+     43.20. Introduction to probability and statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/displaying-airport-data.html">
+     43.21. Displaying airport data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/soda-profits.html">
+     43.22. Soda profits
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/analyzing-COVID-19-papers.html">
+     43.23. Analyzing COVID-19 papers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/estimation-of-COVID-19-pandemic.html">
+     43.24. Estimation of COVID-19 pandemic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/data-processing-in-python.html">
+     43.25. Data processing in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/evaluating-data-from-a-form.html">
+     43.26. Evaluating data from a form
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/data-preparation.html">
+     43.27. Data preparation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/analyzing-data.html">
+     43.28. Analyzing data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/nyc-taxi-data-in-winter-and-summer.html">
+     43.29. NYC taxi data in winter and summer
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/matplotlib-applied.html">
+     43.30. Matplotlib applied
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/tell-a-story.html">
+     43.36. Tell a story
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/explore-a-planetary-computer-dataset.html">
+     43.37. Explore a planetary computer dataset
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/exploring-for-anwser.html">
+     43.38. Exploring for answers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/market-research.html">
+     43.39. Market research
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/low-code-no-code-data-science-project-on-azure-ml.html">
+     43.40. Low code/no code Data Science project on Azure ML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/data-science-project-using-azure-ml-sdk.html">
+     43.41. Data Science project using Azure ML SDK
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/data-science/data-science-in-the-cloud-the-azure-ml-sdk-way.html">
+     43.42. Data Science in the cloud: The “Azure ML SDK” way
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/ml-overview-iris.html">
+     43.43. Machine Learning overview - assignment 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/ml-overview-mnist-digits.html">
+     43.44. Digit Recognizer
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/regression-with-scikit-learn.html">
+     43.46. Regression with Scikit-learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/regression-tools.html">
+     43.47. Regression tools
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/managing-data.html">
+     43.48. Managing data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/exploring-visualizations.html">
+     43.49. Exploring visualizations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/try-a-different-model.html">
+     43.50. Try a different model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/create-a-regression-model.html">
+     43.51. Create a regression model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/linear-and-polynomial-regression.html">
+     43.52. Linear and polynomial regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/build-classification-models-predict-the-price-range.html">
+     43.53. Build classification models：Predict the price range
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/retrying-some-regression.html">
+     43.54. Retrying some regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/pumpkin-varieties-and-color.html">
+     43.55. Pumpkin varieties and color
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/delicious-asian-and-indian-cuisines.html">
+     43.56. Delicious asian and indian cuisines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/explore-classification-methods.html">
+     43.57. Explore classification methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-advanced/ensemble-learning/random-forests-intro-and-regression.html">
+     43.58. Random forests intro and regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-advanced/ensemble-learning/random-forests-for-classification.html">
+     43.59. Random forests for classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-advanced/ensemble-learning/beyond-random-forests-more-ensemble-models.html">
+     43.60. Beyond random forests: more ensemble models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/machine-learning-productionization/data-engineering.html">
+     43.61. Data engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/machine-learning-productionization/counterintuitive-challenges-in-ml-debugging.html">
+     43.62. Counterintuitive Challenges in ML Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/machine-learning-productionization/debugging-in-classification.html">
+     43.63. Case Study: Debugging in Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/machine-learning-productionization/debugging-in-regression.html">
+     43.64. Case Study: Debugging in Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/study-the-solvers.html">
+     43.65. Study the solvers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/build-classification-models.html">
+     43.66. Build classification models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/build-classification-model.html">
+     43.67. Build Classification Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../assignments/ml-fundamentals/parameter-play.html">
+     43.68. Parameter play
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../introduction.html">
+   44. Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-programming/python-programming-introduction.html">
+     44.1. Python programming introduction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-programming/python-programming-basics.html">
+     44.2. Python programming basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-programming/python-programming-advanced.html">
+     44.3. Python programming advanced
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-science-introduction.html">
+     44.4. Data Science introduction
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     44.5. Relational vs. non-relational database
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="numpy-and-pandas.html">
+     44.6. NumPy and Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization.html">
+     44.7. Data visualization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-science-lifecycle.html">
+     44.8. Data Science lifecycle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-science-in-the-cloud.html">
+     44.9. Data Science in the cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-science-in-real-world.html">
+     44.10. Data Science in real world
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ml-fundamentals/ml-overview.html">
+     44.11. Machine Learning overview
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/open-academy/machine-learning/main?urlpath=tree/open-machine-learning-jupyter-book/slides/data-science/relational-vs-non-relational-database.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/open-academy/machine-learning/blob/main/open-machine-learning-jupyter-book/slides/data-science/relational-vs-non-relational-database.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/open-academy/machine-learning/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/open-academy/machine-learning//issues/new?title=Issue%20on%20page%20%2Fslides/data-science/relational-vs-non-relational-database.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/open-academy/machine-learning/edit/main/open-machine-learning-jupyter-book/slides/data-science/relational-vs-non-relational-database.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/slides/data-science/relational-vs-non-relational-database.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relational-databases">
+   44.5.1. 1. Relational databases
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#it-all-starts-with-tables">
+     44.5.1.1. It all starts with tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-shortcomings-of-a-single-table-approach">
+     44.5.1.2. The shortcomings of a single table approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-concepts-of-relationships">
+     44.5.1.3. The concepts of relationships
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cities">
+       44.5.1.3.1. cities
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rainfall">
+       44.5.1.3.2. rainfall
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieving-the-data">
+     44.5.1.4. Retrieving the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joining-data">
+     44.5.1.5. Joining data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-relational-data">
+   44.5.2. 2. Non-relational data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosql">
+     44.5.2.1. NoSQL
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nosql-databasetypes-and-examples-sup-1-sup">
+       44.5.2.1.1. NoSQL databaseTypes and examples
+       <sup>
+        1
+        <sup>
+        </sup>
+       </sup>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   44.5.3. 4. Your turn! 🚀
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   44.5.4. 5. References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Relational vs. non-relational database</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relational-databases">
+   44.5.1. 1. Relational databases
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#it-all-starts-with-tables">
+     44.5.1.1. It all starts with tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-shortcomings-of-a-single-table-approach">
+     44.5.1.2. The shortcomings of a single table approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-concepts-of-relationships">
+     44.5.1.3. The concepts of relationships
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cities">
+       44.5.1.3.1. cities
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rainfall">
+       44.5.1.3.2. rainfall
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieving-the-data">
+     44.5.1.4. Retrieving the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joining-data">
+     44.5.1.5. Joining data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-relational-data">
+   44.5.2. 2. Non-relational data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nosql">
+     44.5.2.1. NoSQL
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nosql-databasetypes-and-examples-sup-1-sup">
+       44.5.2.1.1. NoSQL databaseTypes and examples
+       <sup>
+        1
+        <sup>
+        </sup>
+       </sup>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   44.5.3. 4. Your turn! 🚀
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   44.5.4. 5. References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
+<span class="cm">&lt;!-- The customized css for the slides --&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../../assets/styles/basic.css&quot;</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../../assets/styles/python-programming-basic.css&quot;</span><span class="p">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><!-- The customized css for the slides -->
+<link rel="stylesheet" type="text/css" href="../../assets/styles/basic.css"/>
+<link rel="stylesheet" type="text/css" href="../../assets/styles/python-programming-basic.css"/>
+</div></div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="relational-vs-non-relational-database">
+<h1><span class="section-number">44.5. </span>Relational vs. non-relational database<a class="headerlink" href="#relational-vs-non-relational-database" title="Permalink to this headline">#</a></h1>
+<section id="relational-databases">
+<h2><span class="section-number">44.5.1. </span>1. Relational databases<a class="headerlink" href="#relational-databases" title="Permalink to this headline">#</a></h2>
+<p>A relational database is a collection of information that organizes data in predefined relationships where data is stored in one or more tables (or “relations”) of columns and rows, making it easy to see and understand how different data structures relate to each other.<sup>[1]</sup></p>
+<font size="4">
+<p><em>1. What is a relational database (Rdbms)? (n.d.). Google Cloud. Retrieved 7 February 2023, from <a class="reference external" href="https://cloud.google.com/learn/what-is-a-relational-database">https://cloud.google.com/learn/what-is-a-relational-database</a></em></p>
+</font><section id="it-all-starts-with-tables">
+<h3><span class="section-number">44.5.1.1. </span>It all starts with tables<a class="headerlink" href="#it-all-starts-with-tables" title="Permalink to this headline">#</a></h3>
+<p>Let’s begin our exploration by starting a table to store information about cities. We might start with their name and country. You could store this in a table as follows:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>City</p></th>
+<th class="head"><p>Country</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+</tr>
+<tr class="row-odd"><td><p>Atlanta</p></td>
+<td><p>United States</p></td>
+</tr>
+<tr class="row-even"><td><p>Auckland</p></td>
+<td><p>New Zealand</p></td>
+</tr>
+</tbody>
+</table>
+<p>Notice the column names of <code class="docutils literal notranslate"><span class="pre">city</span></code>, <code class="docutils literal notranslate"><span class="pre">country</span></code> and <code class="docutils literal notranslate"><span class="pre">population</span></code> describe the data being stored, and each row has information about one city.</p>
+</section>
+<section id="the-shortcomings-of-a-single-table-approach">
+<h3><span class="section-number">44.5.1.2. </span>The shortcomings of a single table approach<a class="headerlink" href="#the-shortcomings-of-a-single-table-approach" title="Permalink to this headline">#</a></h3>
+<p>Let’s start to add some additional data to our burgeoning database  - annual rainfall (in millimeters). We’ll focus on the years 2018, 2019 and 2020. If we were to add it for Tokyo, it might look something like this:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>City</p></th>
+<th class="head"><p>Country</p></th>
+<th class="head"><p>Year</p></th>
+<th class="head"><p>Amount</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+<td><p>2020</p></td>
+<td><p>1690</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+<td><p>2019</p></td>
+<td><p>1874</p></td>
+</tr>
+<tr class="row-even"><td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+<td><p>2018</p></td>
+<td><p>1445</p></td>
+</tr>
+</tbody>
+</table>
+<p>You might notice we’re duplicating the name and country of the city over and over.</p>
+<p>Let’s add new columns for each year:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>City</p></th>
+<th class="head"><p>Country</p></th>
+<th class="head"><p>2018</p></th>
+<th class="head"><p>2019</p></th>
+<th class="head"><p>2020</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+<td><p>1445</p></td>
+<td><p>1874</p></td>
+<td><p>1690</p></td>
+</tr>
+<tr class="row-odd"><td><p>Atlanta</p></td>
+<td><p>United States</p></td>
+<td><p>1779</p></td>
+<td><p>1111</p></td>
+<td><p>1683</p></td>
+</tr>
+<tr class="row-even"><td><p>Auckland</p></td>
+<td><p>New Zealand</p></td>
+<td><p>1386</p></td>
+<td><p>942</p></td>
+<td><p>1176</p></td>
+</tr>
+</tbody>
+</table>
+<p>While this avoids the row duplication, it adds a couple of other challenges.</p>
+<ul class="simple">
+<li><p>We would need to modify the structure of our table each time there’s a new year.</p></li>
+<li><p>Additionally, as our data grows having our years as columns will make it trickier to retrieve and calculate values.</p></li>
+</ul>
+<p>This is why we need multiple tables and relationships.</p>
+</section>
+<section id="the-concepts-of-relationships">
+<h3><span class="section-number">44.5.1.3. </span>The concepts of relationships<a class="headerlink" href="#the-concepts-of-relationships" title="Permalink to this headline">#</a></h3>
+<p>Let’s return to our data and determine how we want to split things up.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>City</p></th>
+<th class="head"><p>Country</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+</tr>
+<tr class="row-odd"><td><p>Atlanta</p></td>
+<td><p>United States</p></td>
+</tr>
+<tr class="row-even"><td><p>Auckland</p></td>
+<td><p>New Zealand</p></td>
+</tr>
+</tbody>
+</table>
+<p>We need to figure out how to reference each city. We need some form of an identifier, ID or (in technical database terms) a primary key.</p>
+<section id="cities">
+<h4><span class="section-number">44.5.1.3.1. </span>cities<a class="headerlink" href="#cities" title="Permalink to this headline">#</a></h4>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>city_id</p></th>
+<th class="head"><p>City</p></th>
+<th class="head"><p>Country</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Tokyo</p></td>
+<td><p>Japan</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Atlanta</p></td>
+<td><p>United States</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Auckland</p></td>
+<td><p>New Zealand</p></td>
+</tr>
+</tbody>
+</table>
+<p>With our cities table created, let’s store the rainfall.</p>
+</section>
+<section id="rainfall">
+<h4><span class="section-number">44.5.1.3.2. </span>rainfall<a class="headerlink" href="#rainfall" title="Permalink to this headline">#</a></h4>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>rainfall_id</p></th>
+<th class="head"><p>city_id</p></th>
+<th class="head"><p>Year</p></th>
+<th class="head"><p>Amount</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2018</p></td>
+<td><p>1445</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>2019</p></td>
+<td><p>1874</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>2020</p></td>
+<td><p>1690</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>2018</p></td>
+<td><p>1779</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>2019</p></td>
+<td><p>1111</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>2</p></td>
+<td><p>2020</p></td>
+<td><p>1683</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>3</p></td>
+<td><p>2018</p></td>
+<td><p>1386</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>3</p></td>
+<td><p>2019</p></td>
+<td><p>942</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>3</p></td>
+<td><p>2020</p></td>
+<td><p>1176</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="retrieving-the-data">
+<h3><span class="section-number">44.5.1.4. </span>Retrieving the data<a class="headerlink" href="#retrieving-the-data" title="Permalink to this headline">#</a></h3>
+<p>If we are using a relational database such as MySQL, SQL Server or Oracle, we can use a language called <strong>Structured Query Language</strong> or <strong>SQL</strong>.</p>
+<p>To retrieve data you use the command <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">city</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">cities</span><span class="p">;</span>
+
+<span class="c1">-- Output:</span>
+<span class="c1">-- Tokyo</span>
+<span class="c1">-- Atlanta</span>
+<span class="c1">-- Auckland</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">SELECT</span></code> is where you list the columns, and <code class="docutils literal notranslate"><span class="pre">FROM</span></code> is where you list the tables.</p>
+<p>Let’s imagine we only wanted to display cities in New Zealand. We need some form of a filter. The SQL keyword for this is <code class="docutils literal notranslate"><span class="pre">WHERE</span></code>.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">city</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">cities</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;New Zealand&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Output:</span>
+<span class="c1">-- Auckland</span>
+</pre></div>
+</div>
+</section>
+<section id="joining-data">
+<h3><span class="section-number">44.5.1.5. </span>Joining data<a class="headerlink" href="#joining-data" title="Permalink to this headline">#</a></h3>
+<p>Until now we’ve retrieved data from a single table. Now we want to bring the data together from both <code class="docutils literal notranslate"><span class="pre">cities</span></code> and <code class="docutils literal notranslate"><span class="pre">rainfall</span></code>. This is done by <em>joining</em> them together.</p>
+<p>Let’s retrieve the rainfall for 2019 for all our cities.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">cities</span><span class="p">.</span><span class="n">city</span>
+<span class="w">    </span><span class="n">rainfall</span><span class="p">.</span><span class="n">amount</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">cities</span>
+<span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">rainfall</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">cities</span><span class="p">.</span><span class="n">city_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rainfall</span><span class="p">.</span><span class="n">city_id</span>
+</pre></div>
+</div>
+<p>Now we can add the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> statement to filter out the only year 2019.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">cities</span><span class="p">.</span><span class="n">city</span>
+<span class="w">    </span><span class="n">rainfall</span><span class="p">.</span><span class="n">amount</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">cities</span>
+<span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">rainfall</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">cities</span><span class="p">.</span><span class="n">city_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rainfall</span><span class="p">.</span><span class="n">city_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">rainfall</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2019</span>
+
+<span class="c1">-- Output</span>
+
+<span class="c1">-- city     | amount</span>
+<span class="c1">-- -------- | ------</span>
+<span class="c1">-- Tokyo    | 1874</span>
+<span class="c1">-- Atlanta  | 1111</span>
+<span class="c1">-- Auckland |  942</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="non-relational-data">
+<h2><span class="section-number">44.5.2. </span>2. Non-relational data<a class="headerlink" href="#non-relational-data" title="Permalink to this headline">#</a></h2>
+<p>A <strong>non-relational database</strong> stores data in a non-tabular form, and tends to be more flexible than the traditional, SQL-based, relational database structures. It does not follow the relational model provided by traditional relational database management systems.<sup>[1]</sup></p>
+<font size="4">
+<p><em>1. What is a non-relational database? (n.d.). MongoDB. Retrieved 9 February 2023, from <a class="reference external" href="https://www.mongodb.com/databases/non-relational">https://www.mongodb.com/databases/non-relational</a></em></p>
+</font><div class="image-citation-box">
+<img class="removeMargin" width="500" src="../images/relational-vs-non-relational-databases.jpg"/>
+<font size="4"><i>Relational VS Non Relational Databases<sup>[1]</sup></i></font>
+</div>
+</div >
+<font size="4">
+<p><em>1. Duca, A. L. (2021, October 5). Relational vs non relational databases. Medium. <a class="reference external" href="https://towardsdatascience.com/relational-vs-non-relational-databases-f2ac792482e3">https://towardsdatascience.com/relational-vs-non-relational-databases-f2ac792482e3</a></em></p>
+</font><section id="nosql">
+<h3><span class="section-number">44.5.2.1. </span>NoSQL<a class="headerlink" href="#nosql" title="Permalink to this headline">#</a></h3>
+<p><strong>NoSQL</strong> is an umbrella term for the different ways to store non-relational data and can be interpreted as “non-SQL”, “non-relational” or  “not only SQL”.</p>
+<p>And these types of database systems can be categorized into 4 types.</p>
+<p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/non-relational-data#keyvalue-data-stores">Key-value</a> databases pair unique keys, which are unique identifiers associated with a value. These pairs are stored using a <a class="reference external" href="https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/">hash table</a> with an appropriate hashing function.</p>
+<div class="image-citation-box">
+<img class="removeMargin" width="500" src="../images/kv-db.png"/>
+<font size="4"><i>Graphical representation of a key-value data store showing 4 unique numerical keys that are associated with 4 various values<sup>[1]</sup></i></font>
+</div>
+</div >
+<font size="4">
+<p><em>1. admin. (2018, March 18). Azure Cosmos DB - key-value database in the cloud. Michał Białecki Blog. <a class="reference external" href="https://www.michalbialecki.com/en/2018/03/18/azure-cosmos-db-key-value-database-cloud/">https://www.michalbialecki.com/en/2018/03/18/azure-cosmos-db-key-value-database-cloud/</a></em></p>
+</font><p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/non-relational-data#graph-data-stores">Graph</a> databases describe relationships in data and are represented as a collection of nodes and edges. A node represents an entity, something that exists in the real world such as a student or bank statement. Edges represent the relationship between two entities  Each node and edge have properties that provide additional information about each node and edge.</p>
+<div class="image-citation-box">
+<img class="removeMargin" width="500" src="../images/graph-db.png"/>
+<font size="4"><i>Graphical representation of a graph data store showing the relationships between people, their interests and locations<sup>[1]</sup></i></font>
+</div>
+</div >
+<font size="4">
+<p><em>1. manishmsfte. (n.d.). Introduction—Azure cosmos db for apache gremlin. Retrieved 9 February 2023, from <a class="reference external" href="https://learn.microsoft.com/en-us/azure/cosmos-db/gremlin/introduction">https://learn.microsoft.com/en-us/azure/cosmos-db/gremlin/introduction</a></em></p>
+</font><p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/non-relational-data#columnar-data-stores">Columnar</a> data stores organize data into columns and rows like a relational data structure but each column is divided into groups called a column family, where all the data under one column is related and can be retrieved and changed in one unit.</p>
+<div class="image-citation-box">
+<img class="removeMargin" width="500" src="../images/columnar-db.png"/>
+<font size="4"><i>Graphical representation of a columnar data store showing a customer database with two column families named Identity and Contact Info<sup>[1]</sup></i></font>
+</div><p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/non-relational-data#document-data-stores">Document</a> data stores build on the concept of a key-value data store and are made up of a series of fields and objects. This section will explore document databases with the Cosmos DB emulator.</p>
+<p>Here is an example from Azure Cosmos DB database. The fields of interest in this document are <code class="docutils literal notranslate"><span class="pre">firstname</span></code>, <code class="docutils literal notranslate"><span class="pre">id</span></code>, and <code class="docutils literal notranslate"><span class="pre">age</span></code>. The rest of the fields with the underscores were generated by Cosmos DB.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;firstname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Eva&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8c74a315-aebf-4a16-bb38-2430a9896ce5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;_rid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bHwDAPQz8s0BAAAAAAAAAA==&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;_self&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dbs/bHwDAA==/colls/bHwDAPQz8s0=/docs/bHwDAPQz8s0BAAAAAAAAAA==/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;_etag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;00000000-0000-0000-9f95-010a691e01d7\&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;_attachments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;attachments/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;_ts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1630544034</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="nosql-databasetypes-and-examples-sup-1-sup">
+<h4><span class="section-number">44.5.2.1.1. </span>NoSQL databaseTypes and examples<sup>1<sup><a class="headerlink" href="#nosql-databasetypes-and-examples-sup-1-sup" title="Permalink to this headline">#</a></h4>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Notable examples of this type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Key–value cache</p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Apache_Ignite">Apache Ignite</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Couchbase">Couchbase</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Oracle_Coherence">Coherence</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/IBM_WebSphere_eXtreme_Scale">eXtreme Scale</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Hazelcast">Hazelcast</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Infinispan">Infinispan</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Memcached">Memcached</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Redis">Redis</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Velocity_(memory_cache)">Velocity</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Key%E2%80%93value_database">Key–value store</a></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Azure_Cosmos_DB">Azure Cosmos DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ArangoDB">ArangoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Amazon_DynamoDB">Amazon DynamoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Aerospike_(database)">Aerospike</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Couchbase">Couchbase</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Scylla_(database)">ScyllaDB</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Key–value store (eventually consistent)</p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Azure_Cosmos_DB">Azure Cosmos DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Oracle_NoSQL_Database">Oracle NoSQL Database</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Riak">Riak</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Voldemort_(distributed_data_store)">Voldemort</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Key–value store (ordered)</p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/FoundationDB">FoundationDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/InfinityDB">InfinityDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Lightning_Memory-Mapped_Database">LMDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/MemcacheDB">MemcacheDB</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Tuple store</p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Jini">Apache River</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/GigaSpaces">GigaSpaces</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Tarantool">Tarantool</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/TIBCO_Software">TIBCO</a> ActiveSpaces, <a class="reference external" href="https://en.wikipedia.org/wiki/Virtuoso_Universal_Server">OpenLink Virtuoso</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Triplestore">Triplestore</a></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/AllegroGraph">AllegroGraph</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/MarkLogic_Server">MarkLogic</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Ontotext">Ontotext-OWLIM</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Oracle_NoSQL_Database">Oracle NoSQL database</a>, Profium Sense, <a class="reference external" href="https://en.wikipedia.org/wiki/Virtuoso_Universal_Server">Virtuoso Universal Server</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Object_database">Object database</a></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Objectivity/DB">Objectivity/DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Perst">Perst</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Zope_Object_Database">ZopeDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Db4o">db4o</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Gemstone_(database)">GemStone/S</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/InterSystems_Cach%C3%A9">InterSystems Caché</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/JADE_(programming_language)">JADE</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ObjectDatabase%2B%2B">ObjectDatabase++</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ObjectDB">ObjectDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ObjectStore">ObjectStore</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Odaba">ODABA</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Realm_(database)">Realm</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Virtuoso_Universal_Server">OpenLink Virtuoso</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Versant_Object_Database">Versant Object Database</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ZODB">ZODB</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Document-oriented_database">Document store</a></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Azure_Cosmos_DB">Azure Cosmos DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ArangoDB">ArangoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/BaseX">BaseX</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Clusterpoint">Clusterpoint</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Couchbase">Couchbase</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/CouchDB">CouchDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/DocumentDB">DocumentDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/EXist">eXist-db</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Lotus_Notes">IBM Domino</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/MarkLogic">MarkLogic</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/MongoDB">MongoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/RavenDB">RavenDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Qizx">Qizx</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/RethinkDB">RethinkDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Elasticsearch">Elasticsearch</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/OrientDB">OrientDB</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Wide_column_store">Wide Column Store</a></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Azure_Cosmos_DB">Azure Cosmos DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Amazon_DynamoDB">Amazon DynamoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Bigtable">Bigtable</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Apache_Cassandra">Cassandra</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Google_Cloud_Datastore">Google Cloud Datastore</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Apache_HBase">HBase</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Hypertable">Hypertable</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Scylla_(database)">ScyllaDB</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Native multi-model database</p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/ArangoDB">ArangoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Azure_Cosmos_DB">Azure Cosmos DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/OrientDB">OrientDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/MarkLogic_Server">MarkLogic</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Apache_Ignite">Apache Ignite</a>,<a class="reference external" href="https://en.wikipedia.org/wiki/NoSQL#cite_note-22">[22]</a><a class="reference external" href="https://en.wikipedia.org/wiki/NoSQL#cite_note-23">[23]</a> <a class="reference external" href="https://en.wikipedia.org/wiki/Couchbase">Couchbase</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/FoundationDB">FoundationDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Oracle_Database">Oracle Database</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Graph_database">Graph database</a></p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Azure_Cosmos_DB">Azure Cosmos DB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/AllegroGraph">AllegroGraph</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/ArangoDB">ArangoDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/InfiniteGraph">InfiniteGraph</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Apache_Giraph">Apache Giraph</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/MarkLogic">MarkLogic</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Neo4J">Neo4J</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/OrientDB">OrientDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Virtuoso_Universal_Server">Virtuoso</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/MultiValue">Multivalue database</a></p></td>
+<td><p>D3 <a class="reference external" href="https://en.wikipedia.org/wiki/Pick_database">Pick database</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Storage_Engine">Extensible Storage Engine</a> (ESE/NT), <a class="reference external" href="https://en.wikipedia.org/wiki/InfinityDB">InfinityDB</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/InterSystems_Cach%C3%A9">InterSystems Caché</a>, jBASE <a class="reference external" href="https://en.wikipedia.org/wiki/Pick_database">Pick database</a>, mvBase <a class="reference external" href="https://en.wikipedia.org/wiki/Rocket_Software">Rocket Software</a>, mvEnterprise <a class="reference external" href="https://en.wikipedia.org/wiki/Rocket_Software">Rocket Software</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Northgate_Information_Solutions">Northgate Information Solutions</a> Reality (the original Pick/MV Database), <a class="reference external" href="https://en.wikipedia.org/wiki/OpenQM">OpenQM</a>, Revelation Software’s OpenInsight (Windows) and Advanced Revelation (DOS), UniData <a class="reference external" href="https://en.wikipedia.org/wiki/Rocket_U2">Rocket U2</a>, UniVerse <a class="reference external" href="https://en.wikipedia.org/wiki/Rocket_U2">Rocket U2</a></p></td>
+</tr>
+</tbody>
+</table>
+<br>
+<font size="4">
+<p><em>1. Nosql. (2022). In Wikipedia. <a class="reference external" href="https://en.wikipedia.org/w/index.php?title=NoSQL&amp;oldid=1123949416">https://en.wikipedia.org/w/index.php?title=NoSQL&amp;oldid=1123949416</a></em></p>
+</font></section>
+</section>
+</section>
+<section id="your-turn">
+<h2><span class="section-number">44.5.3. </span>4. Your turn! 🚀<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://open-academy.github.io/machine-learning/assignments/data-science/displaying-airport-data.html">Displaying airport data</a></p></li>
+<li><p><a class="reference external" href="https://open-academy.github.io/machine-learning/data-science/working-with-data/non-relational-data.html#your-turn">Twitter data</a></p></li>
+<li><p><a class="reference external" href="https://open-academy.github.io/machine-learning/assignments/data-science/soda-profits.html">Soda profit</a></p></li>
+</ol>
+</section>
+<section id="references">
+<h2><span class="section-number">44.5.4. </span>5. References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://open-academy.github.io/machine-learning/data-science/working-with-data/relational-databases.html">Relational database</a></p></li>
+<li><p><a class="reference external" href="https://open-academy.github.io/machine-learning/data-science/working-with-data/non-relational-data.html">Non-relational data</a></p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "open-academy/machine-learning",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./slides/data-science"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="data-science-introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">44.4. </span>Data Science introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="numpy-and-pandas.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">44.6. </span>NumPy and Pandas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Ocademy<br/>
+  
+      &copy; Copyright 2022-2022.<br/>
+    <div class="extra_footer">
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> Text content of this work is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
