@@ -33,4 +33,3 @@ dependencies:
     - jupyterlite-xeus-sqlite==0.2.1
     - jupyterlite-p5-kernel==0.1.0
     - jupyterlite-xeus-lua==0.3.1
-    
