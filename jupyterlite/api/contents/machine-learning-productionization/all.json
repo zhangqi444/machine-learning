@@ -1,0 +1,61 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2023-03-26T17:27:48.655558Z",
+      "format": null,
+      "last_modified": "2023-03-26T17:24:04.157176Z",
+      "mimetype": null,
+      "name": "debugging-in-regression.ipynb",
+      "path": "machine-learning-productionization/debugging-in-regression.ipynb",
+      "size": 44739,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-26T17:27:48.655558Z",
+      "format": null,
+      "last_modified": "2023-03-26T17:24:04.153176Z",
+      "mimetype": null,
+      "name": "debugging-in-classification.ipynb",
+      "path": "machine-learning-productionization/debugging-in-classification.ipynb",
+      "size": 37896,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-26T17:27:48.651558Z",
+      "format": null,
+      "last_modified": "2023-03-26T17:24:04.153176Z",
+      "mimetype": null,
+      "name": "counterintuitive-challenges-in-ml-debugging.ipynb",
+      "path": "machine-learning-productionization/counterintuitive-challenges-in-ml-debugging.ipynb",
+      "size": 18426,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-26T17:27:48.655558Z",
+      "format": null,
+      "last_modified": "2023-03-26T17:24:04.153176Z",
+      "mimetype": null,
+      "name": "data-engineering.ipynb",
+      "path": "machine-learning-productionization/data-engineering.ipynb",
+      "size": 17760,
+      "type": "notebook",
+      "writable": true
+    }
+  ],
+  "created": "2023-03-26T17:27:48.655558Z",
+  "format": "json",
+  "last_modified": "2023-03-26T17:27:48.655558Z",
+  "mimetype": null,
+  "name": "machine-learning-productionization",
+  "path": "machine-learning-productionization",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}
