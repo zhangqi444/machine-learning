@@ -1932,7 +1932,7 @@ Split your data into training and testing groups by calling <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy is 0.8073394495412844
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy is 0.7889908256880734
 </pre></div>
 </div>
 </div>
@@ -1955,10 +1955,12 @@ Split your data into training and testing groups by calling <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ingredients: Index([&#39;black_bean&#39;, &#39;cane_molasses&#39;, &#39;pepper&#39;, &#39;pork&#39;, &#39;sesame_oil&#39;, &#39;sherry&#39;,
-       &#39;soy_sauce&#39;, &#39;soybean&#39;, &#39;vinegar&#39;],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ingredients: Index([&#39;apple&#39;, &#39;butter&#39;, &#39;cardamom&#39;, &#39;carrot&#39;, &#39;cayenne&#39;, &#39;chicken_broth&#39;,
+       &#39;cilantro&#39;, &#39;cinnamon&#39;, &#39;coconut&#39;, &#39;coriander&#39;, &#39;cumin&#39;, &#39;fenugreek&#39;,
+       &#39;lemon_juice&#39;, &#39;lentil&#39;, &#39;onion&#39;, &#39;pepper&#39;, &#39;potato&#39;, &#39;tamarind&#39;,
+       &#39;turmeric&#39;],
       dtype=&#39;object&#39;)
-cuisine: chinese
+cuisine: indian
 </pre></div>
 </div>
 </div>
@@ -2008,24 +2010,24 @@ cuisine: chinese
   </thead>
   <tbody>
     <tr>
-      <th>chinese</th>
-      <td>0.942535</td>
-    </tr>
-    <tr>
-      <th>japanese</th>
-      <td>0.042560</td>
+      <th>indian</th>
+      <td>0.997812</td>
     </tr>
     <tr>
       <th>thai</th>
-      <td>0.011029</td>
+      <td>0.002055</td>
+    </tr>
+    <tr>
+      <th>chinese</th>
+      <td>0.000100</td>
     </tr>
     <tr>
       <th>korean</th>
-      <td>0.003809</td>
+      <td>0.000021</td>
     </tr>
     <tr>
-      <th>indian</th>
-      <td>0.000067</td>
+      <th>japanese</th>
+      <td>0.000013</td>
     </tr>
   </tbody>
 </table>
@@ -2046,15 +2048,15 @@ cuisine: chinese
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-     chinese       0.77      0.71      0.74       267
-      indian       0.94      0.90      0.92       229
-    japanese       0.75      0.78      0.77       231
-      korean       0.84      0.77      0.80       237
-        thai       0.76      0.89      0.82       235
+     chinese       0.68      0.68      0.68       228
+      indian       0.92      0.89      0.90       247
+    japanese       0.75      0.81      0.77       236
+      korean       0.85      0.70      0.77       244
+        thai       0.76      0.86      0.80       244
 
-    accuracy                           0.81      1199
-   macro avg       0.81      0.81      0.81      1199
-weighted avg       0.81      0.81      0.81      1199
+    accuracy                           0.79      1199
+   macro avg       0.79      0.79      0.79      1199
+weighted avg       0.79      0.79      0.79      1199
 </pre></div>
 </div>
 </div>

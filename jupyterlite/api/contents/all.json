@@ -1,0 +1,121 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.153213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.153213Z",
+      "mimetype": null,
+      "name": "data-science",
+      "path": "data-science",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.169213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.169213Z",
+      "mimetype": null,
+      "name": "set-up-env",
+      "path": "set-up-env",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.169213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:42:39.877614Z",
+      "mimetype": null,
+      "name": "project-plan-template.ipynb",
+      "path": "project-plan-template.ipynb",
+      "size": 1419,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.157213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.157213Z",
+      "mimetype": null,
+      "name": "machine-learning-productionization",
+      "path": "machine-learning-productionization",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.157213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.157213Z",
+      "mimetype": null,
+      "name": "ml-advanced",
+      "path": "ml-advanced",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.169213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.169213Z",
+      "mimetype": null,
+      "name": "prerequisites",
+      "path": "prerequisites",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.153213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:42:39.869614Z",
+      "mimetype": "text/markdown",
+      "name": "introduction.md",
+      "path": "introduction.md",
+      "size": 484,
+      "type": "file",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.165213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.165213Z",
+      "mimetype": null,
+      "name": "ml-fundamentals",
+      "path": "ml-fundamentals",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.153213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:42:39.869614Z",
+      "mimetype": "text/markdown",
+      "name": "get-started.md",
+      "path": "get-started.md",
+      "size": 3143,
+      "type": "file",
+      "writable": true
+    }
+  ],
+  "created": "2023-03-27T04:52:42.169213Z",
+  "format": "json",
+  "last_modified": "2023-03-27T04:52:42.169213Z",
+  "mimetype": null,
+  "name": "",
+  "path": "",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

@@ -1,0 +1,37 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.161213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.161213Z",
+      "mimetype": null,
+      "name": "ensemble-learning",
+      "path": "ml-advanced/ensemble-learning",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2023-03-27T04:52:42.157213Z",
+      "format": null,
+      "last_modified": "2023-03-27T04:52:42.157213Z",
+      "mimetype": null,
+      "name": "clustering",
+      "path": "ml-advanced/clustering",
+      "size": null,
+      "type": "directory",
+      "writable": true
+    }
+  ],
+  "created": "2023-03-27T04:52:42.157213Z",
+  "format": "json",
+  "last_modified": "2023-03-27T04:52:42.157213Z",
+  "mimetype": null,
+  "name": "ml-advanced",
+  "path": "ml-advanced",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}
