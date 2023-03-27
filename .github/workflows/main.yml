@@ -64,7 +64,7 @@ jobs:
       name: Build the JupyterLite
       run: |
         jupyter lite build --contents ./open-machine-learning-jupyter-book/assignments --output-dir ./open-machine-learning-jupyter-book/_build/html/jupyterlite
-        continue-on-error: false
+      continue-on-error: false
       
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
